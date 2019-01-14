@@ -8,6 +8,11 @@ namespace ReviewProject
 {
     public class Die
     {
+        //Create a new instance of the math class Random
+        //This instance (occurance, object) will be shared by each instance of the class Die
+        //This instance will be created when the first instance of Die is created
+        private static Random _rnd = new Random();
+
         //this is the definition of a object
         //it is a conceptual view of the data
         //that will be held by a physical 
@@ -21,7 +26,6 @@ namespace ReviewProject
         //public data memebers CAN be reached directly by the user
         private int _Side;
         private string _Color;
-        private int _Face;
 
         //Properties
         //A property is an external interface between the user and a single piece of data within the instance
@@ -41,7 +45,54 @@ namespace ReviewProject
             {
                 //takes the supplied user value and place it into the internal private data member
                 //the incoming piece of data is place into a special variable that is called: value
-                _Side = value;
+                if (value > 5 && value > 21)
+                {
+                    _Side = value;
+                    Roll(); //Consider placing this method withing the property if the set is public and not private
+                           //If private then the method SetSides solves this problem
+                }
+                else
+                {
+                    throw new Exception("The die cannot be lower than 6 or greater than 20");
+                }
+            }
+        }
+
+        //Another version of Sides using a private set and auto implemented property
+        //In this version you would need to code a method like SetSides()
+        public int Sides { get; private set; }
+
+        //Auto Implemented Property
+        // public
+        // it has a datatype
+        // it has a name
+        // IT DOES NOT have an internal data member that you can DIRECTLY access
+        // the system will create, internally, a data storage area of the appropriate
+        //    datatype and manage the area
+        // the only way to access the data of an Auto Implemented Property is via
+        //    the property
+        // usually use when there is no need for any internal validation or other
+        //    property logic
+        public int FaceValue { get; set; }
+
+        public string Color
+        {
+            get
+            {
+                return _Color;
+            }
+            set
+            {
+                //  (value == null) this will fail for an empty string
+                //  (value == "") this will fail for a null value
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Color has no value.");
+                }
+                else
+                {
+                    _Color = value;
+                }
             }
         }
 
@@ -57,11 +108,59 @@ namespace ReviewProject
         //This is similar to the system default contructor
         public Die()
         {
+            //You could leave this constructor empty and the system would acess the normal default value to your data member
             //You can directly access a private data member in any place within your class
             _Side = 6;
-            _Color = "";
+            //You can access any property any place within your class
+            _Color = "White";
+
+            //You could use a class method to generate a value for a data member/auto property
+            Roll();
         }
 
+        //Greedy Constructor
+        //Typically has a parameter for each data member and auto implemented property within your class
+        //parameter order is not important
+        //This constructor allows the outside user to create and assign their own values to the data member/auto properties at the time of instance creation
+        public Die(int sides, string color)
+        {
+            //Since this data is coming from an outside source it is best to use your property to save the value, specially if the property has validation
+            Side = sides;
+            Color = color;
+            Roll();
+        }
+
+
         //Behaviours (methods)
+        //These are actions that the class can perform
+        //The actions may or may not alter data members/auto values
+        //The actions could simply take a value(s) from the user and perform some logic operations against the values
+
+        //Can be public or private
+        //Create a method that allows the user to change the number of sides on a die
+        public void SetSides(int sides)
+        {
+            if (sides >= 6 && sides <= 20)
+            {
+                Side = sides;
+            }
+            else
+            {
+                //Optionally 
+                //a) throw a new exception
+                throw new Exception("Invalid value for sides");
+                //b) set _Sides to a default value
+                //Side = 6;
+            }
+            Roll();
+        }
+
+        public void Roll()
+        {
+            //No parameters are required for this method since it will be using the internal data values to complete its functions 
+
+            //Randomly generate a value for the die depending on the maximum sides
+            FaceValue = _rnd.Next(1, Sides + 1);
+        }
     }
 }
