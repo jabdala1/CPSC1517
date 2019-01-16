@@ -45,7 +45,7 @@ namespace ReviewProject
             {
                 //takes the supplied user value and place it into the internal private data member
                 //the incoming piece of data is place into a special variable that is called: value
-                if (value > 5 && value > 21)
+                if (value >= 6 && value <= 20 )
                 {
                     _Side = value;
                     Roll(); //Consider placing this method withing the property if the set is public and not private
@@ -73,7 +73,7 @@ namespace ReviewProject
         //    the property
         // usually use when there is no need for any internal validation or other
         //    property logic
-        public int FaceValue { get; set; }
+        public int FaceValue { get; private set; }
 
         public string Color
         {
