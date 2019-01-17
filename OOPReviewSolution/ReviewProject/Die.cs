@@ -160,7 +160,7 @@ namespace ReviewProject
             //No parameters are required for this method since it will be using the internal data values to complete its functions 
 
             //Randomly generate a value for the die depending on the maximum sides
-            FaceValue = _rnd.Next(1, Sides + 1);
+            FaceValue = _rnd.Next(1, Side + 1);
         }
     }
 }
