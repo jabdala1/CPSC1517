@@ -1,0 +1,37 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <!--Brand Area of the menu-->
+    <div class="navbar-header">
+        <a class="navbar-brand" syle="font-size: x-large">
+            <strong>Razor Samples</strong>
+        </a>
+    </div>
+    <!--Menu: Menu roote items-->
+    <ul class="nav navbar-nav">
+        <!--Roote menu item-->
+        <li>
+            <a href="@Href("~/Default.cshtml")">Home</a>
+        </li>
+        <!--Create a drop down list (submenus)-->
+        <li class="dropdown">
+            <!--The Toggle root menu item-->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Controls<b class="caret"></b></a>
+            <!--Code the actual submenu items-->
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="@Href("~/Controls/TextBoxes.cshtml")">TextBoxes</a>
+                </li>
+                <li>
+                    <a href="@Href("~/Controls/RadioButtons.cshtml")">RadioButtons</a>
+                </li>
+                <li>
+                    <a href="@Href("~/Controls/CheckBoxes.cshtml")">CheckBoxes</a>
+                </li>
+                <li>
+                    <a href="@Href("~/Controls/DropDownList.cshtml")">DropDownList</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
