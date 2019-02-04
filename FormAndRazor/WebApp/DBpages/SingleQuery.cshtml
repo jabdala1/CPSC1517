@@ -3,8 +3,9 @@
     Page.Title = "DB - Single Query";
 
     var searcharg = Request.Form["searcharg"];
-    var regionid = Request.Form["redionid"];
-    var description = Request.Form["description"];
+    var thebutton = Request.Form["formbutton"];
+    var regionid = "";
+    var description = "";
 
     //remember, on the 1st page pass, the form has NOT been displayed
     //searcharg will be null
@@ -33,11 +34,42 @@
     <h1>DataBase: Single Query</h1>
 }
 
+@if (IsPost)
+{
+    if (thebutton.Equals("clear"))
+    {
+        searcharg = "0";
+        regionid = "";
+        description = "";
+    }
+    else
+    {
+        //Test to see if any record was returned from the query
+        //If no record was returned than the results will be null
+        if (results == null)
+        {
+            <p><span style="color:limegreen"><strong>There are no records found.</strong></span></p>
+            regionid = "";
+            description = "";
+        }
+        else
+        {
+            //A record was actually retrieved
+            //Set output fields
+            //How does one access a data field on the resulting data record(s)
+            //a) Via index xxxx[columnindex]
+            //b) Via the column title xxxx.columntitlename
+            <p><span style="color:limegreen">Found</span></p>
+            regionid = results[0].ToString();
+            description = results.RegionDescription;
+        }
+    }
+}
 <form id="theform" method="post">
     <div class="row">
         <div class="col-md-4">
             <label for="searcharg">Enter Region ID:</label>
-            <input type="text" id="searcharg" name="searcharg" placeholder="Enter Region ID" value="@searcharg" />
+            <input type="number" id="searcharg" name="searcharg" placeholder="Enter Region ID" step="1" min="0" value="@searcharg" />
             <br />
             <button type="submit" id="formbutton" name="formbutton" class="btn btn-primary" value="search">Search</button>
             &nbsp;&nbsp;
