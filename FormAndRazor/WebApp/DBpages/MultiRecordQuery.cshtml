@@ -2,7 +2,7 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = "MultiRecord Query";
 
-    var categorylist = Request.Form["categorycist"];
+    var categorylist = Request.Form["categorylist"];
     if (categorylist == null)
     {//the first time the content page is activated
      //  the categorylist will be null because there was
@@ -44,7 +44,7 @@
 
         //code here
 
-        var queryCommand = "SELECT ProductId FROM Products WHERE CategoryID = @0 Order by @2";
+        var queryCommand = "SELECT ProductId FROM Products WHERE CategoryID = @0";
 
         var results = db.Query(queryCommand, categorylist);
 

@@ -20,7 +20,7 @@
                         + "WHERE CategoryID = @0";
     //QueryValue returns a single value (not a record) from the  query
     //this value will be used in titling the WebGrid display
-    //var categoryname = db.QueryValue(scalarcommand, categoryid);
+    var categoryname = db.QueryValue(scalarcommand, categoryid);
 
     var querycommand = "SELECT ProductID, ProductName, UnitPrice, UnitsInStock, Discontinued "
                         + "FROM Products "
@@ -46,7 +46,7 @@
 
 <div class="row">
     <div class="col-sm-offset-3">
-        <span style="font-size:x-large"><strong>Products for @categoryname/strong></span>
+        <span style="font-size:x-large"><strong>Products for @categoryname</strong></span>
         @if (griddisplay == 1)
         {
             <!--Display the WebGrid instance in its default display-->
