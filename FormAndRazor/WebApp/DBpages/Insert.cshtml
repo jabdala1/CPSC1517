@@ -143,9 +143,20 @@
                 <!--  loop code here-->
                 @foreach (var supitem in supResults)
                 {
-                    <option value="@supitem[0]">
-                        @supitem[1]
-                    </option>
+                    //Maintain the selected item in the list between posting
+                    if (supitem[0].ToString() == selectedsupplier)
+                    {
+                        <option value="@supitem[0]" selected>
+                            @supitem[1]
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@supitem[0]">
+                            @supitem[1]
+                        </option>
+                    }
+
                 }
             </select><br />
             <select id="catergoryUD" name="categoryID">
@@ -153,9 +164,18 @@
                 <!--  loop code here-->
                 @foreach (var catitem in catresults)
                 {
-                    <option value="@catitem[0]">
-                        @catitem[1]
-                    </option>
+                    if (catitem[0].ToString() == selectedcategory)
+                    {
+                        <option value="@catitem[0]" selected>
+                            @catitem[1]
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@catitem[0]">
+                            @catitem[1]
+                        </option>
+                    }
                 }
             </select><br />
             <input name="CategoryID" id="CategoryID" type="number" value="@selectedcategory" /><br />
