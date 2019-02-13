@@ -42,22 +42,23 @@
 
         //query the database using the choice from the dropdown list
 
-        //code here
+        var querycommand = "SELECT ProductId "
+                           + "FROM Products "
+                           + "WHERE CategoryID = @0";
 
-        var queryCommand = "SELECT ProductId FROM Products WHERE CategoryID = @0";
-
-        var results = db.Query(queryCommand, categorylist);
+        var results = db.Query(querycommand, categorylist);
 
         //check the results of the query
         //QuerySingle no results test for null
-        //Query no result test using .Count() == 0
+        //Query no results test using .Count() == 0
         if (results.Count() == 0)
         {
             //empty results code here
-            <p><span style="color:firebrick">No products found for the requested category. Select a differnt category.</span></p>
+            <p><span style="color:blue">No products found for the requested category. Select a different category.</span></p>
         }
         else
         {
+
             //found results code here
 
             //pass a value from the returned record to the indicated page

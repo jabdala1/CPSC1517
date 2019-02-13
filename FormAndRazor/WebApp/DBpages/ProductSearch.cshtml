@@ -1,5 +1,6 @@
 ﻿@{
     Page.Title = "Product Search";
+    //Layout = "~/_Layout.cshtml;
     Layout = "~/_Layout.cshtml";
     var productsearch = Request.Form["ProductSearch"];
 
@@ -12,11 +13,9 @@
                         + "ORDER BY ProductName";
 
 }
-
 @section head{
     <link href="~/Content/MyCustomStyles.css" rel="stylesheet" />
 }
-
 @section banner{
     <h1>Product Search</h1>
 }
@@ -57,20 +56,22 @@
                         grid.Column(columnName: "UnitPrice", header: "$"),
                         grid.Column(columnName: "UnitsInStock", header: "UOS"),
                         grid.Column(header:"", format:@<text><a href="~/DBPages/ProductEdit.cshtml?pid=@item.ProductID">Edit</a></text>)
-                          ));
+                       ));
                     }
                 }
             }
         </div>
-        @*Since this webgrid is within a form whuch using a post method, the following script is required. This is due to the fact that webgrid uses the get method for paging.*@
-        @*In short if your code is in a form you won't need this code.*@
-        <script type="text/javascript">
-            var links = $('a[href*=page], a[href*=sort]'), form = $('form');
-            links.click(function () {
-                form.attr("action", this.href);
-                $(this).attr("href", "javascript:");
-                form.submit();
-            });
-        </script>
+
     </form>
+    @* Since the webgrid is within a form using the post method, and,
+        since the webgrid uses the get method for paging; the following
+        script is needed to handle webgrid paging.*@
+    <script type="text/javascript">
+        var links = $('a[href*=page], a[href*=sort]'), form = $('form');
+        links.click(function () {
+            form.attr("action", this.href);
+            $(this).attr("href", "javascript:");
+            form.submit();
+        });
+    </script>
 </div> 

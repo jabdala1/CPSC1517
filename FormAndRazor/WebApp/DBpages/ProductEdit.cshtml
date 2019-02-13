@@ -55,10 +55,10 @@
                         + "WHERE ProductID = @0";
     var queryProducts = db.QuerySingle(queryStatement, pid);
 }
-
 @section head{
     <link href="~/Content/MyCustomStyles.css" rel="stylesheet" />
 }
+
 
 @section banner{
     <h1>Product Edit - Update and Delete</h1>
@@ -67,94 +67,137 @@
 {
     if (thebutton.Equals("cancel"))
     {
-        //a) you could redirect to the search page
+        //a) could redirect to the search page
         //b) reset data to the current record for the productid
         //c) empty the data fields
         //d) leave the data as is with a message to the user
-        <p><span style="color:firebrick">You have cancelled the changing of the data. Return to <a href="~/DBpages/ProductSearch.cshtml">search</a>, for another product</span></p>
+        <p>
+            <span style="color:firebrick">
+                You have cancel the changing of the data. Return to
+                <a href="~/DBPages/ProductSearch.cshtml">search</a> for another product.
+            </span>
+        </p>
         productid = "";
     }
     else if (thebutton.Equals("delete"))
     {
-        //Confrim that a product id exists, without a product id no record on the database can be found
+        // confirm that a product id exists
+        // without a product id no record on the database
+        //    can be found
         if (string.IsNullOrEmpty(productid))
         {
-            <p><span style="color:firebrick">No product deletable. Return to <a href="~/DBpages/ProductSearch.cshtml">search</a>, for another product</span></p>
+            <p>
+                <span style="color:firebrick">
+                    No product deletable. Return to
+                    <a href="~/DBPages/ProductSearch.cshtml">search</a> for another product.
+                </span>
+            </p>
         }
         else
         {
             try
             {
+
+
                 //database is already connected
                 //command??
-                var deletecommand = "DELETE Products where productid = @0";
+                var deletecommand = "DELETE Products WHERE ProductID = @0";
                 //execution
-                //The return value from .Execute() is the number of rows affected from the database
+                //the return value from .Execute() is the number of rows affected
+                //  from the database
                 int results = db.Execute(deletecommand, productid);
                 if (results == 0)
                 {
-                    <p><span style="color:mediumblue">No product with supplied id was found. Return to <a href="~/DBpages/ProductSearch.cshtml">search</a>, for another product</span></p>
+                    <span style="color:blue">
+                        No product with supplied id was found. No product removed. Return to
+                        <a href="~/DBPages/ProductSearch.cshtml">search</a> for another product.
+                    </span>
                 }
                 else
                 {
-                    <p><span style="color:mediumblue">Product removed. Return to <a href="~/DBpages/ProductSearch.cshtml">search</a>, for another product</span></p>
+                    <span style="color:green">
+                        Product removed. Return to
+                        <a href="~/DBPages/ProductSearch.cshtml">search</a> for another product.
+                    </span>
                 }
             }
             catch (Exception ex)
             {
-                <p><span style="color:firebrick">@ex.Message</span></p>
+                <p>
+                    <span style="color:firebrick">
+                        @ex.Message
+                    </span>
+                </p>
+
             }
         }
     }
     else
     {
 
-        //Confrim that a product id exists, without a product id no record on the database can be found
         if (string.IsNullOrEmpty(productid))
         {
-            <p><span style="color:firebrick">No product deletable. Return to <a href="~/DBpages/ProductSearch.cshtml">search</a>, for another product</span></p>
+            <p>
+                <span style="color:firebrick">
+                    No product deletable. Return to
+                    <a href="~/DBPages/ProductSearch.cshtml">search</a> for another product.
+                </span>
+            </p>
         }
         else
         {
             try
             {
+
+
                 //database is already connected
                 //command??
                 var updatecommand = "UPDATE Products SET "
-                                    + "ProductName = @0, "
-                                    + "SupplierID = @1, "
-                                    + "CategoryID = @2, "
-                                    + "QuantityPerUnit = @3, "
-                                    + "UnitPrice = @4, "
-                                    + "UnitsInStock = @5, "
-                                    + "UnitsOnOrder = @6, "
-                                    + "ReorderLevel= @7, "
-                                    + "Discontinued = @8 "
-                                    + "WHERE ProductID = @9";
-
+                            + "ProductName = @0, "
+                            + "SupplierID = @1, "
+                            + "CategoryID = @2, "
+                            + "QuantityPerUnit = @3, "
+                            + "UnitPrice = @4, "
+                            + "UnitsInStock = @5, "
+                            + "UnitsOnOrder = @6, "
+                            + "ReorderLevel = @7, "
+                            + "Discontinued = @8 "
+                            + "WHERE ProductID = @9 "
+                            ;
                 //execution
-                //The return value from .Execute() is the number of rows affected from the database
+                //the return value from .Execute() is the number of rows affected
+                //  from the database
                 int results = db.Execute(updatecommand, productname,
-                                            supplierid == "0" ? null : supplierid,
-                                            categoryid == "0" ? null : categoryid,
-                                            quantityperunit == "0" ? null : quantityperunit,
-                                            unitprice == "0" ? null : unitprice,
-                                            unitsinstock == "0" ? null : unitsinstock,
-                                            unitsonorder == "0" ? null : unitsonorder,
-                                            reorderlevel == "0" ? null : reorderlevel,
-                                            discontinued);
+                    supplierid == "0" ? null : supplierid,
+                    categoryid == "0" ? null : categoryid,
+                    string.IsNullOrEmpty(quantityperunit) ? null : quantityperunit,
+                    string.IsNullOrEmpty(unitprice) ? null : unitprice,
+                    string.IsNullOrEmpty(unitsinstock) ? null : unitsinstock,
+                    string.IsNullOrEmpty(unitsonorder) ? null : unitsonorder,
+                    string.IsNullOrEmpty(reorderlevel) ? null : reorderlevel,
+                    discontinued, productid);
                 if (results == 0)
                 {
-                    <p><span style="color:mediumblue">No product with supplied id was found. Return to <a href="~/DBpages/ProductSearch.cshtml">search</a>, for another product</span></p>
+                    <span style="color:blue">
+                        No product with supplied id was found. No product updated. Return to
+                        <a href="~/DBPages/ProductSearch.cshtml">search</a> for another product.
+                    </span>
                 }
                 else
                 {
-                    <p><span style="color:mediumblue">Product has been updated. Return to <a href="~/DBpages/ProductSearch.cshtml">search</a>, for another product</span></p>
+                    <span style="color:green">
+                        Product updated.
+                    </span>
                 }
             }
             catch (Exception ex)
             {
-                <p><span style="color:firebrick">@ex.Message</span></p>
+                <p>
+                    <span style="color:firebrick">
+                        @ex.Message
+                    </span>
+                </p>
+
             }
         }
     }
@@ -245,15 +288,17 @@ else //for IsPost == false
         </div>
         <div class="row">
             <button type="submit" name="theButton" id="theUpdate" class="btn btn-primary" value="update">Update</button>&nbsp;&nbsp;&nbsp;
-            <button type="submit" name="theButton" id="theDelete" class="btn btn-primary" value="delete" >Delete</button>&nbsp;&nbsp;&nbsp;
+            <button type="submit" name="theButton" id="theDelete" class="btn btn-primary" value="delete">Delete</button>&nbsp;&nbsp;&nbsp;
             <button type="submit" name="theButton" id="theCancel" class="btn btn-primary" value="cancel">Cancel</button>
         </div>
-    </form>
-    @*This javascript will allow for a confirmation dialog to appear when a particular button is pressed (the delete button)*@
-    <script type="text/javascript">
-        documen.GetElementById(theDelete).onclick = ConfirmDelete;
+
+        @* the javascript will allow for a confirmation dialog to appear
+            when a particular button is pressed (theDelete)*@
+        <script type="text/javascript">
+        document.getElementById("theDelete").onclick = ConfirmDelete;
         function ConfirmDelete() {
             return confirm("Are you sure you want to remove @productname?");
         }
-    </script>
+        </script>
+    </form>
 </div>
