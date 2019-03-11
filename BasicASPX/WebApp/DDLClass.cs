@@ -12,12 +12,11 @@ namespace WebApp
 
         public DDLClass()
         {
-            //Default constructor
-
+            //default
         }
         public DDLClass(int valuefield, string displayfield)
         {
-            //Greedy constructor
+            //greedy 
             ValueField = valuefield;
             DisplayField = displayfield;
         }

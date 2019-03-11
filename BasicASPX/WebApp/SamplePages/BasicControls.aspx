@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BasicControls.aspx.cs" Inherits="WebApp.SamplePages.BasicControls" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h1>Basic Controls</h1>
     <table align="center" style="width: 80%">
         <tr>
             <td align="right">TextBox</td>
             <td>
                 <asp:TextBox ID="TextBoxNumberChoice" runat="server"
-                     ToolTip="Enter a choice of 1 to 4"></asp:TextBox>
+                     ToolTip="Enter a choice of 1 to 4" ></asp:TextBox>
                 &nbsp;&nbsp;
                 <asp:Button ID="SubmitButtonChoice" runat="server" Text="Submit Choice" OnClick="SubmitButtonChoice_Click" />
             </td>
@@ -49,6 +50,8 @@
             <td>
                 <asp:DropDownList ID="CollectionList" runat="server">
                 </asp:DropDownList>
+                &nbsp;&nbsp;
+                <asp:Button ID="SubmitList" runat="server" Text="Submit List" OnClick="SubmitList_Click" />
             </td>
         </tr>
         <tr>
