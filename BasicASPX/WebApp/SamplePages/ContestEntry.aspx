@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ContestEntry.aspx.cs" Inherits="WebApp.SamplePages.ContestEntry" %>
+﻿<%@ Page Title="Help Me" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ContestEntry.aspx.cs" Inherits="WebApp.SamplePages.ContestEntry" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-header">
         <h1>Contest Entry</h1>
@@ -16,7 +16,78 @@
 
         </div>
     </div>
-  
+            <%-- RequiredField = Ensure that user has not skipped the flied --%>
+            <%-- RequiredValidator =  Checks that the is user's entry is within a lower-upper range of numbers of characres --%>
+            <%-- ReqularExpression = Checes that usr's entry matches a parttern defined by a regular expression, i.e. email, phone number, postlcode, etc. --%>
+            <%-- CompareValidation =  i) datatype --%>
+            <%--                      ii) check an entered value against a constant value.--%>
+            <%--                      iii) Checks an entered value against entered value --%>
+            <%-- CustomValdator = This calls a user method on your webserver  --%>
+    <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server" 
+        ControlToValidate="FirstName" ErrorMessage="First Name is required" 
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"></asp:RequiredFieldValidator>
+
+    <asp:RequiredFieldValidator ID="RequiredFieldLastName" runat="server" 
+        ControlToValidate="LastName" ErrorMessage="Last Name is required" 
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"></asp:RequiredFieldValidator>
+
+    <asp:RequiredFieldValidator ID="RequiredFieldStreetAddress1" runat="server" 
+        ControlToValidate="StreetAddress1" ErrorMessage="Street Address is required" 
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"></asp:RequiredFieldValidator>
+
+    <asp:RequiredFieldValidator ID="RequiredFieldCheckAnswer" runat="server" 
+        ControlToValidate="CheckAnswer" ErrorMessage="Answer is required" 
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"></asp:RequiredFieldValidator>
+
+    <asp:RequiredFieldValidator ID="RequiredFieldCity" runat="server" 
+        ControlToValidate="City" ErrorMessage="City is required" 
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"></asp:RequiredFieldValidator>
+
+    <asp:RequiredFieldValidator ID="RequiredFieldPostalCode" runat="server" 
+        ControlToValidate="PostalCode" ErrorMessage="PostalCode is required" 
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"></asp:RequiredFieldValidator>
+
+    <asp:RequiredFieldValidator ID="RequiredFieldEmail" runat="server" 
+        ControlToValidate="EmailAddress" ErrorMessage="Email is required" 
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"></asp:RequiredFieldValidator>
+    
+    <%-- There is no field to demonstrate a RangeValidation on this form the street address 2 will be used for this demonstration --%>
+
+    <%--<asp:RangeValidator ID="RangeStreetAddress2" runat="server" ControlToValidate="StreetAddress2"
+        ErrorMessage="Enter 1 to 5, according to your mood! (1 strongly like, 5 stronly dislike)"
+        SetFocusOnError="true" ForeColor="Firebrick" MaximumValue="5" MinimumValue="1"></asp:RangeValidator>--%>
+
+    <asp:RegularExpressionValidator ID="RegularExpressionPostalCode" runat="server"
+        ControlToValidate="PostalCode" ErrorMessage="Invalid Postal Code"
+        SetFocusOnError="true" Display="None" ForeColor="Firebrick"
+        ValidationExpression="[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]"></asp:RegularExpressionValidator>
+
+    <%-- Sample of a datatype check using compare --%>
+
+    <%--<asp:CompareValidator ID="CompareCheckAnswer" runat="server" 
+        ControlToValidate="CheckAnswer" ErrorMessage="Skill Testing is not a number"
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"
+        Type="Integer" Operator="DataTypeCheck"></asp:CompareValidator>--%>
+
+    <%-- Sample of a constant value using compare --%>
+
+    <asp:CompareValidator ID="CompareCheckAnswer" runat="server" 
+        ControlToValidate="CheckAnswer" ErrorMessage="Skill Testing is not a number"
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"
+        Type="Integer" Operator="Equal" ValueToCompare="15"></asp:CompareValidator>
+
+    <%-- Sample of 2 field comparing using Compare we have no fields to test assume a password field --%>
+
+    <%--<asp:CompareValidator ID="ComaprePassword" runat="server" 
+        ControlToValidate="ConfirmPassword" ErrorMessage="Confrim Password is notthe same"
+        Display="None" SetFocusOnError="true" ForeColor="Firebrick"
+        Type="String" Operator="Equal" ValueToCompare="Password"></asp:CompareValidator>--%>
+
+    <%-- Display all errors in one place using the ValidationSummary Control --%>
+
+    <asp:ValidationSummary ID="ValidationContestEntry" runat="server" HeaderText="Correct the following mistakes:"
+        CssClass="alert alert-danger"/>
+
     <div class="row">
         <div class ="col-md-6">
             <fieldset class="form-horizontal">
@@ -72,7 +143,6 @@
                <br />
                <asp:CheckBox ID="Terms" runat="server" Text="I agree to the terms of the contest" />
            </p>
-
             <p>
                 Enter your answer to the following calculation instructions:<br />
                 Multiply 15 times 6<br />
@@ -85,11 +155,11 @@
         <div class="col-md-6">   
             <div class="col-md-offset-2">
                 <p>
-                    <asp:Button ID="Submit" runat="server" Text="Submit" />&nbsp;&nbsp;
-                    <asp:Button ID="Clear" runat="server" Text="Clear" CausesValidation="true"  />
+                    <asp:Button ID="Submit" runat="server" Text="Submit" OnClick="Submit_Click" />&nbsp;&nbsp;
+                    <asp:Button ID="Clear" runat="server" Text="Clear" CausesValidation="true" OnClick="Clear_Click"  />
                 </p>
                 <asp:Label ID="Message" runat="server" ></asp:Label><br />
-            
+                <asp:GridView ID="ContestEntryList" runat="server"></asp:GridView>
             </div>
         </div>
     </div>

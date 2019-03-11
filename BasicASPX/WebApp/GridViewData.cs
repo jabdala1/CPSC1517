@@ -17,12 +17,13 @@ namespace WebApp
         {
 
         }
-        public GridViewData(string fullname, string emailaddress, string phonenumber, string fullorpartime, string jobs)
+        public GridViewData(string fullname, string emailaddress,
+            string phonenumber, string fullorparttime, string jobs)
         {
             FullName = fullname;
             EmailAddress = emailaddress;
             PhoneNumber = phonenumber;
-            FullorPartTime = fullorpartime;
+            FullorPartTime = fullorparttime;
             Jobs = jobs;
         }
     }

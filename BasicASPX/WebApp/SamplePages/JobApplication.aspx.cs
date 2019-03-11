@@ -9,12 +9,14 @@ namespace WebApp.SamplePages
 {
     public partial class JobApplication : System.Web.UI.Page
     {
-        //this is a temporary storage area because we are not currently using a database
+        //this is a temporary storage area because we are not
+        //     currently using a database
         public static List<GridViewData> gvCollection;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Message.Text = "";
-            if (!Page.IsPostBack)
+            if(!Page.IsPostBack)
             {
                 gvCollection = new List<GridViewData>();
             }
@@ -22,15 +24,16 @@ namespace WebApp.SamplePages
 
         protected void Submit_Click(object sender, EventArgs e)
         {
-            //assuming for this example, all data is valid
+            //assuming for  this example, all data is valid
+
             string fullname = FullName.Text;
             string emailaddress = EmailAddress.Text;
             string phonenumber = PhoneNumber.Text;
-            string fullorpart = FullOrPartTime.SelectedValue;
+            string fullorparttime = FullOrPartTime.SelectedValue;
 
             //the checkboxlist is a collection of items (rows)
             //we can traverse a collection using a loop: foreach
-            //on each row of the collection, you can process its data
+            //on each rows of the collection, you can process its data
             string jobs = "";
 
             foreach(ListItem jobrow in Jobs.Items)
@@ -42,7 +45,8 @@ namespace WebApp.SamplePages
             }
 
             //place the data on the data collection
-            gvCollection.Add(new GridViewData(fullname, emailaddress, phonenumber, fullorpart, jobs));
+            gvCollection.Add(new GridViewData(fullname, emailaddress,
+                phonenumber, fullorparttime, jobs));
 
             //display the collection of data
             //we would like to display the data in a tabular format
@@ -51,12 +55,11 @@ namespace WebApp.SamplePages
             JobApplicantList.DataBind();
         }
 
-        protected void clear_Click(object sender, EventArgs e)
+        protected void Clear_Click(object sender, EventArgs e)
         {
             FullName.Text = "";
             EmailAddress.Text = "";
             PhoneNumber.Text = "";
-            //Both will work
             FullOrPartTime.SelectedIndex = -1;
             //FullOrPartTime.ClearSelection();
             //Jobs.SelectedIndex = -1;

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Job Application" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="JobApplication.aspx.cs" Inherits="WebApp.SamplePages.JobApplication" %>
+﻿<%@ Page Title="Job App" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="JobApplication.aspx.cs" Inherits="WebApp.SamplePages.JobApplication" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <h3>Job Application Form</h3>
     <div class="row">
@@ -53,12 +53,12 @@
             </fieldset>
         </div>
         <div class="col-sm-6">
-            <asp:Button ID="Submit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="Submit_Click"/>&nbsp;&nbsp;
-            <asp:Button ID="clear" runat="server" Text="Clear" CssClass="btn" OnClick="clear_Click"/><br />
+            <asp:Button ID="Submit" runat="server" Text="Submit"
+                 CssClass="btn btn-primary" OnClick="Submit_Click"/>&nbsp;&nbsp;
+            <asp:Button ID="Clear" runat="server" Text="Clear"  CssClass="btn" OnClick="Clear_Click" /><br />
             <asp:Label ID="Message" runat="server" ></asp:Label>
             <br />
-            <hr style="border-color: crimson; width: 3px;"/>
-            <br />
+            <hr style="width:3px;"/>
             <asp:GridView ID="JobApplicantList" runat="server"></asp:GridView>
         </div>
     </div>
