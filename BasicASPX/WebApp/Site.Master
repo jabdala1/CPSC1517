@@ -46,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">CPSC1517-ASPX</a>
+                    <a class="navbar-brand" runat="server" href="~/">Janne Abdala</a>
                 </div>
                 <div class="navbar-collapse collapse">
                    <%-- given default menu
