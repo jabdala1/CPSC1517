@@ -16,28 +16,31 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Clear old messages
+            //clear old messages
             MessageLabel.Text = "";
 
+            //load the dropdownlist on the first time processing this page
             if (!Page.IsPostBack)
             {
-                //All calls should be done in user friendly error handling
+                //all calls should be done in user friendly error handling
                 try
                 {
-                    //When the page is first loaded, obtain the complete list of categories from the database
+                    //when the page is first loaded, obtain the
+                    //   complete list of categories from the
+                    //   database
                     CategoryController sysmgr = new CategoryController();
                     List<Category> datainfo = sysmgr.Category_List();
-                    //Sorth this list alphabetically
+                    //sort this list alphabetically
                     datainfo.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
-                    //Assign the data to the dropdownlist control
+                    // assign the data to the dropdownlist control
                     CategoryList.DataSource = datainfo;
-                    //Indicate the DataTextField and DataValueField
+                    //indicate the DataTextField and DataValueField
                     CategoryList.DataTextField = nameof(Category.CategoryName);
-                    CategoryList.DataTextField = nameof(Category.CategoryID);
-                    //Bind the datasoruce
+                    CategoryList.DataValueField = nameof(Category.CategoryID);
+                    //Bind the datasource
                     CategoryList.DataBind();
                     //add a prompt
-                    CategoryList.Items.Insert(0, "Select...");
+                    CategoryList.Items.Insert(0, "select ...");
                 }
                 catch (Exception ex)
                 {
@@ -48,43 +51,42 @@ namespace WebApp.SamplePages
 
         protected void Submit_Click(object sender, EventArgs e)
         {
-            //Ensure a selection was made
+            //ensure a selection was made
             if (CategoryList.SelectedIndex == 0)
             {
-                MessageLabel.Text = "Make a selection...";
+                MessageLabel.Text = "Select a category of products to display";
             }
             else
             {
                 //within user friendly error handling
                 try
                 {
-                    //Connect to the appropraite conroller
+                    //  connect to the appropriate controller
                     ProductController sysmgr = new ProductController();
-                    //issue a request to the controller's appropriate method
+                    //  issue a request to the controller's appropriate method
                     List<Product> datainfo = sysmgr.Product_GetByCategory(int.Parse(CategoryList.SelectedValue));
-                    //check results
+                    //  check results
                     if (datainfo.Count() == 0)
                     {
-                        // none (.Count() == 0): message to user
-                        MessageLabel.Text = "No data found for selected category...";
-                        //Optionally clear out display
+                        //    none ( .Count() == 0): message to user
+                        MessageLabel.Text = "No product for select category";
+                        //optionally clear out display
                         CategoryProductList.DataSource = null;
                         CategoryProductList.DataBind();
                     }
                     else
                     {
-                        // found: load a gridview
-                        //Optional sort on ProductName
+                        //    found: load a gridview
+                        //optional sort on ProductName
                         datainfo.Sort((x, y) => x.ProductName.CompareTo(y.ProductName));
                         CategoryProductList.DataSource = datainfo;
                         CategoryProductList.DataBind();
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     MessageLabel.Text = ex.Message;
                 }
-                
             }
         }
 

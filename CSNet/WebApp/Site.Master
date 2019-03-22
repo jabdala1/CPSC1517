@@ -53,12 +53,8 @@
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
-<<<<<<< HEAD
-                        <li><a runat="server" href="~/SamplePages/SimpleQueries">Simply Queries</a></li>
-=======
-                        <li><a runat="server" href="~/SamplePages/SimpleQueries.aspx">Single Queries</a></li>
-                        <li><a runat="server" href="~/SamplePages/SqlProcQueries.aspx">SQL Proc Queries</a></li>
->>>>>>> fe8d761f5f2cc2c1e4c2a12d03a29209e9201928
+                        <li><a runat="server" href="~/SamplePages/SimpleQueries">Simply Query</a></li>
+                        <li><a runat="server" href="~/SamplePages/SqlProcQueries">Proc Query</a></li>
                     </ul>
                 </div>
             </div>
