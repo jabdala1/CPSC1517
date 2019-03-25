@@ -23,14 +23,34 @@
             </tr>
             <tr>
                 <td align="center">
-                    <asp:GridView ID="CategoryProductList" runat="server"></asp:GridView>
+                    <asp:GridView ID="CategoryProductList" runat="server" AllowPaging="True" PageSize="5" PagerSettings-Mode="NumericFirstLast" PagerSettings-FirstPageText="Start" PagerSettings-LastPageText="End" GridLines="Horizontal" AlternatingRowStyle-BackColor="#CCCCCC"
+                        OnPageIndexChanging="CategoryProductList_PageIndexChanging" AutoGenerateColumns="False">
+<AlternatingRowStyle BackColor="#CCCCCC"></AlternatingRowStyle>
+
+                        <Columns>
+                            <asp:TemplateField HeaderText="Name"></asp:TemplateField>
+                            <asp:TemplateField HeaderText="Price">
+                                <HeaderStyle Font-Bold="True" />
+                                <ItemStyle HorizontalAlign="Right" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="QoH">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" text='<%# Eval("Product Name")%>'></asp:Label>
+                                </ItemTemplate>
+                                <ControlStyle Font-Bold="True" />
+                                <HeaderStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                        </Columns>
+
+<PagerSettings FirstPageText="Start" LastPageText="End" Mode="NumericFirstLast"></PagerSettings>
+                    </asp:GridView>
                 </td>
 
             </tr>
             <tr>
                 <td>&nbsp;</td>
             </tr>
-            <tr>
+            <tr pagersettings-pagebuttoncount="5">
                 <td align="center">
                     <asp:Label ID="MessageLabel" runat="server" ></asp:Label>
                 </td>

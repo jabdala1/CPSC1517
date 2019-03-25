@@ -94,5 +94,26 @@ namespace WebApp.SamplePages
             CategoryProductList.DataSource = null;
             CategoryProductList.DataBind();
         }
+
+        protected void CategoryProductList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            //The e parameter will supply the new page index that is requested
+            //You must set the grid control pageindex to this supplied value
+            CategoryProductList.PageIndex = e.NewPageIndex;
+
+            //You are must refresh your gridview with a call to the database
+            try
+            {
+                ProductController sysmgr = new ProductController();
+                List<Product> datainfo = sysmgr.Product_GetByCategory(int.Parse(CategoryList.SelectedValue));
+                datainfo.Sort((x, y) => x.ProductName.CompareTo(y.ProductName));
+                CategoryProductList.DataSource = datainfo;
+                CategoryProductList.DataBind();
+            }
+            catch (Exception ex)
+            {
+                MessageLabel.Text = ex.Message;
+            }
+        }
     }
 }
