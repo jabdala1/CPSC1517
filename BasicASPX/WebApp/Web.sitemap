@@ -14,5 +14,10 @@
       <siteMapNode url="~/SamplePages/JobApplication.aspx" title="Formatting/GridView"  description="" />
       <siteMapNode url="~/SamplePages/ContestEntry.aspx" title="Validation"  description="" />
     </siteMapNode>
+    <siteMapNode url="" title="Practice Forms" description="">
+      <siteMapNode url="~/PracticeForms/UserRegistration.aspx" title="User Registration" description="" />
+      <!--<siteMapNode url="~/PracticeForms/Form2.aspx" title="Form 2" description="" />
+      <siteMapNode url="~/PracticeForms/Form3.aspx" title="Form 3" description="" />-->
+    </siteMapNode>
   </siteMapNode>
 </siteMap>

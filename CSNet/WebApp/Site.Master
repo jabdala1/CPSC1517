@@ -53,8 +53,9 @@
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
-                        <li><a runat="server" href="~/SamplePages/SimpleQueries">Simply Query</a></li>
-                        <li><a runat="server" href="~/SamplePages/SqlProcQueries">Proc Query</a></li>
+                        <li><a runat="server" href="~/SamplePages/SimpleQueries.aspx">Simply Query</a></li>
+                        <li><a runat="server" href="~/SamplePages/SqlProcQueries.aspx">Proc Query</a></li>
+                        <li><a runat="server" href="~/SamplePages/FilterSearches.aspx">Filter Searches</a></li>
                     </ul>
                 </div>
             </div>
