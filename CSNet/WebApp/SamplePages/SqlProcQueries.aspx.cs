@@ -96,5 +96,70 @@ namespace WebApp.SamplePages
             CategoryProductList.DataSource = null;
             CategoryProductList.DataBind();
         }
+
+        protected void CategoryProductList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            //the e parameter will supply the new page index that is requested
+            //you must set the grid control pageindex to this supplied value
+            CategoryProductList.PageIndex = e.NewPageIndex;
+
+            //you must refresh your gridview with a
+            //   call to the database
+            try
+            {
+                ProductController sysmgr = new ProductController();
+                List<Product> datainfo = sysmgr.Product_GetByCategory(int.Parse(CategoryList.SelectedValue));
+                datainfo.Sort((x, y) => x.ProductName.CompareTo(y.ProductName));
+                CategoryProductList.DataSource = datainfo;
+                    CategoryProductList.DataBind();
+            }
+            catch (Exception ex)
+            {
+                MessageLabel.Text = ex.Message;
+            }
+        }
+
+        protected void CategoryProductList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //this event belongs to the Command Select button
+            //accessing the data is wholly dependent on the type of data display used
+            //    in the gridview cell.
+            //there are 4 different ways to access your data (because there are 4 ways
+            //    to setup your gridview cell.
+            //We have used the generic template technique to create
+            //    our gridview cell contents
+            //Templates allow the developer to place web controls
+            //    within each cell
+            //When you access a web control within the gridview cell
+            //    you WILL reference the control type and then use
+            //    the control type access technique
+            string productid;
+            string discontinued;
+            string productname;
+
+            //personal style
+            GridViewRow agvrow = CategoryProductList.Rows[CategoryProductList.SelectedIndex];
+            //grab ProductID
+            //syntax
+            // agvrow: this points to the selected gridview row
+            // FindControl("controlidname"): this is the ID value on the
+            //     gridview cell
+            // as controltype: this indicates the type of web control 
+            //     within the gridview cell that you are touching
+            // (xxxxx).Text: indicates the web control access technique
+            productid = (agvrow.FindControl("ProductID") as Label).Text;
+            productname = (agvrow.FindControl("ProductName") as Label).Text;
+            if ((agvrow.FindControl("Discontinued") as CheckBox).Checked)
+            {
+                discontinued = "discontinued";
+            }
+            else
+            {
+                discontinued = "available";
+            }
+
+            MessageLabel.Text = productname + " (" + productid + " ) " +
+                "is " + discontinued;
+        }
     }
 }
