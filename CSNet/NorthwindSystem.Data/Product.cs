@@ -36,6 +36,7 @@ namespace NorthwindSystem.Data
 
         [Key]
         public int ProductID { get; set; }
+        [Required(ErrorMessage = "Product name is required")]
         public string ProductName { get; set; }
         public int? SupplierID { get; set; }
         public int? CategoryID { get; set; }
