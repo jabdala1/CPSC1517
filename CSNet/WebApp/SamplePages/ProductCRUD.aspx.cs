@@ -142,13 +142,16 @@ namespace WebApp.NorthwindPages
                 if (SupplierList.SelectedIndex == 0)
                 {
                     errormsgs.Add("Please select a supplier");
-                    LoadMessageDisplay(errormsgs, "alert alert-warning");
 
                 }
-                else if (CategoryList.SelectedIndex == 0)
+                if (CategoryList.SelectedIndex == 0)
                 {
                     errormsgs.Add("Please select a category");
-                    LoadMessageDisplay(errormsgs, "alert alert-warning");
+                }
+                //all code behind logical validation errors are captured
+                if (errormsgs.Count() > 0)
+                {
+                    LoadMessageDisplay(errormsgs, "alert alert-info");
                 }
                 else
                 {
@@ -245,6 +248,16 @@ namespace WebApp.NorthwindPages
 
                 }
             //}
+        }
+
+        protected void UpdateProduct_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RemoveProduct_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
